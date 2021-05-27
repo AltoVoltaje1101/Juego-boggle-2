@@ -18,18 +18,20 @@ public class Jugador {
     private String[] palabras;
     private int[] puntaje;
     private int numero;
+    private int lenguaje;
 
     /* Al momento de crear un objeto llamado jugador, se pide que ingresemos un hashset de palabras
     Dicho HashSet es el mismo que se creo en cajita, el cual contiene todas las palabras que apareceran en el
     tablero
      */
-    public Jugador(HashSet<String> palabrasDisponibles) {
+    public Jugador(HashSet<String> palabrasDisponibles,int lenguaje) {
         //el hashset propio se igual al hashset proporcionado
         this.palabrasDisponibles = palabrasDisponibles;
         this.palabrasUsadas = new HashSet<String>();
         palabras = new String[3];
         puntaje = new int[3];
         numero = 0;
+        this.lenguaje=lenguaje;
 
     }
 
@@ -53,18 +55,22 @@ public class Jugador {
                 puntaje[numero] = palabra.length();
                 numero++;
             } else {
-                System.out.println("Esta palabra ya ha sido ingresada anteriormente");
+                if(lenguaje == 1)System.out.println("Esta palabra ya ha sido ingresada anteriormente");
+                else System.out.println("This word has already been entered ");
             }
         } else if (palabra.equalsIgnoreCase("salir") == false) {
-            System.out.println("No se ha encontrado la palabra requerida");
+            if(lenguaje == 1)System.out.println("No se ha encontrado la palabra requerida");
+            else System.out.println("The required word was not found ");
         } else {
-            System.out.println("el juego ha terminado, vuelva pronto!");
+            if(lenguaje ==1)System.out.println("el juego ha terminado, vuelva pronto!");
+            else System.out.println("the game is over, come back soon!  ");
         }
     }
 
     //este metodo se utiliza unicamente para la impresion de los resultados que va teniendo el jugador
     public void impresionDatos() {
-        System.out.println("Palabras encontradas\tPuntos por palabra");
+        if(lenguaje ==1)System.out.println("Palabras encontradas\tPuntos por palabra");
+        else System.out.println("Words found \tPoints per word ");
         int total = 0, numero = 0;
         for (int i = 0; i < 3; i++) {
 
@@ -75,6 +81,7 @@ public class Jugador {
             }
 
         }
-        System.out.println("Total de puntos obtenidos: " + total + "\nPalabras encontradas: " + numero);
+        if(lenguaje ==1)System.out.println("Total de puntos obtenidos: " + total + "\nPalabras encontradas: " + numero);
+        else System.out.println("Total points obtained: "+ total +" \tWords found: " + numero);
     }
 }
